@@ -3,3 +3,6 @@ dist/
 .vscode/
 package-lock.json
 webpack.config.js
+.eslintignore
+.eslintrc
+.gitignore
