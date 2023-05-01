@@ -24,19 +24,23 @@ clearButton.addEventListener('click', clear);
 backspaceButton.addEventListener('click', backspaceNumber);
 dotButton.addEventListener('click', appendDot);
 
+// Add event listeners to all number buttons
 numberButtons.forEach((button) =>
   button.addEventListener('click', () => appendNumber(button.textContent)),
 );
 
+// Add event listeners to all operator buttons
 operatorButtons.forEach((button) =>
   button.addEventListener('click', () => setOperation(button.textContent)),
 );
 
+// This function appends a number to the calculator screen
 function appendNumber(number) {
   if (currentValue.textContent === '0' || shouldResetScreen) resetScreen();
   currentValue.textContent += number;
 }
 
+// This function appends a decimal point to the current value on the calculator screen
 function appendDot() {
   if (shouldResetScreen) resetScreen();
   if (currentValue.textContent === '') currentValue.textContent = '0';
@@ -44,11 +48,13 @@ function appendDot() {
   currentValue.textContent += '.';
 }
 
+// This function resets the calculator screen
 function resetScreen() {
   currentValue.textContent = '';
   shouldResetScreen = false;
 }
 
+// This function clear the calculator screen
 function clear() {
   currentValue.textContent = '0';
   previousValue.textContent = '';
@@ -57,10 +63,12 @@ function clear() {
   currentOperation = null;
 }
 
+// This function removes the last digit from the current value on the calculator screen
 function backspaceNumber() {
   currentValue.textContent = currentValue.textContent.toString().slice(0, -1);
 }
 
+// This function sets the current operation to be performed on the calculator
 function setOperation(operator) {
   if (currentOperation !== null) evaluate();
   firstOperand = currentValue.textContent;
@@ -69,6 +77,7 @@ function setOperation(operator) {
   shouldResetScreen = true;
 }
 
+// This function evaluates the current operation on the calculator
 function evaluate() {
   if (currentOperation === null || shouldResetScreen) return;
   if (currentOperation === '÷' && currentValue.textContent === '0') {
@@ -81,10 +90,12 @@ function evaluate() {
   currentOperation = null;
 }
 
+// This function rounds off the result of an operation
 function roundResult(number) {
   return Math.round(number * 1000) / 1000;
 }
 
+// This function handles keyboard input for the calculator
 function handleKeyboardInput(e) {
   if (e.key >= 0 && e.key <= 9) appendNumber(e.key);
   if (e.key === '.') appendDot();
@@ -95,6 +106,7 @@ function handleKeyboardInput(e) {
     setOperation(convertOperator(e.key));
 }
 
+// This function converts the keyboard operator to the corresponding calculator operator
 function convertOperator(keyboardOperator) {
   if (keyboardOperator === '/') return '÷';
   if (keyboardOperator === '*') return '×';
@@ -102,6 +114,7 @@ function convertOperator(keyboardOperator) {
   if (keyboardOperator === '+') return '+';
 }
 
+// Basic math functions
 function add(a, b) {
   return a + b;
 }
@@ -118,6 +131,7 @@ function divide(a, b) {
   return a / b;
 }
 
+// This function performs the specified operation on two numbers
 function operate(operator, a, b) {
   a = Number(a);
   b = Number(b);
