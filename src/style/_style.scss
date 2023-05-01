@@ -48,6 +48,7 @@
 
   &-current {
     font-size: 40px;
+    min-height: 64px;
   }
 }
 
@@ -128,7 +129,7 @@
   height: 45px;
 }
 
-.result-btn {
+.equals-btn {
   background-color: green;
 
   &:hover {
